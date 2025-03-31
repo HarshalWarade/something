@@ -51,11 +51,6 @@ const AllUsers = () => {
               All Users
             </h2>
 
-<<<<<<< HEAD
-
-=======
-            {/* sdsdsdsds */}
->>>>>>> changes
             <div className={`flex gap-4 items-start`}>
               {users.map((user) => (
                 

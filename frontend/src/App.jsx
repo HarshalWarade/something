@@ -18,6 +18,7 @@ import ProtectedRoute from './components/admin/ProtectedRoute'
 import AllUsers from './components/AllUsers'
 import WrongPage from './components/WrongPage'
 import ChatComponent from './components/ChatComponent'
+import CompanyDashboard from './components/CompanyDashboard'
 
 
 const appRouter = createBrowserRouter([
@@ -64,6 +65,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/*",
     element: <WrongPage />
+  },
+  {
+    path: "/company/:id",
+    element: <CompanyDashboard />
   },
   
 

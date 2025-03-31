@@ -1,6 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import jobSlice from "./jobSlice";
+import companySlice from "./companySlice";
+import companySlice1 from "./companySlice1";
+import applicationSlice from "./applicationSlice";
+import chatSlice from "./chatSlice";
 import {
   persistStore,
   persistReducer,
@@ -12,20 +16,19 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import companySlice from "./companySlice";
-import applicationSlice from "./applicationSlice";
-import chatSlice from "./chatSlice.js"
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  whitelist: ["auth", "company", "company1"], // Persist these slices
 };
 
 const rootReducer = combineReducers({
   auth: authSlice,
   job: jobSlice,
-  company: companySlice,
+  company: companySlice, 
+  company1: companySlice1,
   application: applicationSlice,
   chat: chatSlice,
 });
@@ -34,6 +37,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -41,4 +45,7 @@ const store = configureStore({
       },
     }),
 });
+
+export const persistor = persistStore(store);
+
 export default store;
