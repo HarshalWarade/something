@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const companySchema = new mongoose.Schema({
     name:{
@@ -24,4 +24,4 @@ const companySchema = new mongoose.Schema({
         required:true
     }
 },{timestamps:true})
-export const Company = mongoose.model("Company", companySchema);
+export const Company = mongoose.model("Company", companySchema)

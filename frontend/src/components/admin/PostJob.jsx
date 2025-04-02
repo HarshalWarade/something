@@ -370,7 +370,7 @@ const PostJob = () => {
     experience: "",
     position: 0,
     companyId: "",
-    requirements: [], // Array for selected skills
+    requirements: [],
   });
 
   const [skillSuggestions, setSkillSuggestions] = useState([]);
@@ -379,7 +379,6 @@ const PostJob = () => {
   const navigate = useNavigate();
   const { companies } = useSelector((store) => store.company);
 
-  // Search skills dynamically
   const skillChangeHandler = (e) => {
     const value = e.target.value;
     setShowDropdown(true);
@@ -389,7 +388,6 @@ const PostJob = () => {
       return;
     }
 
-    // Flatten skillset into a single array
     const allSkills = Object.values(skillset).flat();
     const filteredSkills = allSkills.filter((requirements) =>
       requirements.toLowerCase().includes(value.toLowerCase())
@@ -398,7 +396,6 @@ const PostJob = () => {
     setSkillSuggestions(filteredSkills);
   };
 
-  // Add skill to input state
   const selectSkill = (requirements) => {
     if (!input.requirements.includes(requirements)) {
       setInput({ ...input, requirements: [...input.requirements, requirements] });
@@ -406,7 +403,6 @@ const PostJob = () => {
     setShowDropdown(false);
   };
 
-  // Remove a skill
   const removeSkill = (requirements) => {
     setInput({ ...input, requirements: input.requirements.filter((s) => s !== requirements) });
   };

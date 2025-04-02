@@ -21,7 +21,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["auth", "company", "company1"], // Persist these slices
+  whitelist: ["auth", "company", "company1"],
 };
 
 const rootReducer = combineReducers({

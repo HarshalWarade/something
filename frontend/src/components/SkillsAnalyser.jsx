@@ -355,7 +355,7 @@ const SkillsAnalyser = ({ userSkills, theme }) => {
     let matchPercentages = {};
 
     Object.entries(skillsData).forEach(([field, skills]) => {
-      // Normalize all skills to lowercase and remove underscores for better matching
+
       let formattedUserSkills = userSkills.map((skill) =>
         skill.toLowerCase().replace(/_/g, " ").trim()
       );
@@ -364,7 +364,6 @@ const SkillsAnalyser = ({ userSkills, theme }) => {
         skill.toLowerCase().replace(/_/g, " ").trim()
       );
 
-      // Find matches
       let matches = formattedUserSkills.filter((skill) =>
         formattedFieldSkills.includes(skill)
       );

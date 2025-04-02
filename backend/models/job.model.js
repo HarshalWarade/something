@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const jobSchema = new mongoose.Schema({
     title: {
@@ -48,5 +48,5 @@ const jobSchema = new mongoose.Schema({
             ref: 'Application',
         }
     ]
-},{timestamps:true});
-export const Job = mongoose.model("Job", jobSchema);
+},{timestamps:true})
+export const Job = mongoose.model("Job", jobSchema)

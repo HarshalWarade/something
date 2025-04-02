@@ -9,14 +9,14 @@ import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
 import { setSearchJobByText } from '@/redux/jobSlice'
 
 const AdminJobs = () => {
-  useGetAllAdminJobs();
-  const [input, setInput] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  useGetAllAdminJobs()
+  const [input, setInput] = useState("")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setSearchJobByText(input));
-  }, [input]);
+    dispatch(setSearchJobByText(input))
+  }, [input])
   return (
     <div>
       <Navbar />

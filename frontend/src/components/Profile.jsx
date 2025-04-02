@@ -253,9 +253,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="p-8">
-        <ChatComponent />
-      </div>
     </>
   );
 };

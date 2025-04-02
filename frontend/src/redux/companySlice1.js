@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { COMPANY_API_END_POINT } from "@/utils/constant";
 
-// ✅ Fetch all companies
 export const fetchCompanies = createAsyncThunk("company/fetchCompanies", async (_, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${COMPANY_API_END_POINT}`);
@@ -12,7 +11,6 @@ export const fetchCompanies = createAsyncThunk("company/fetchCompanies", async (
   }
 });
 
-// ✅ Fetch a single company by ID
 export const fetchCompanyById = createAsyncThunk("company/fetchCompanyById", async (companyId, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${COMPANY_API_END_POINT}/${companyId}`);
@@ -22,7 +20,6 @@ export const fetchCompanyById = createAsyncThunk("company/fetchCompanyById", asy
   }
 });
 
-// ✅ Register a new company
 export const registerCompany = createAsyncThunk("company/registerCompany", async (companyData, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${COMPANY_API_END_POINT}/register`, companyData, { withCredentials: true });
@@ -35,43 +32,40 @@ export const registerCompany = createAsyncThunk("company/registerCompany", async
 const companySlice1 = createSlice({
   name: "company1",
   initialState: {
-    companies: [], // ✅ Always start with an empty array
-    company: null, // ✅ Store single company data
+    companies: [],
+    company: null,
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // ✅ Fetch all companies
       .addCase(fetchCompanies.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchCompanies.fulfilled, (state, action) => {
         state.loading = false;
-        state.companies = action.payload.companies || []; // ✅ Ensure it's an array
+        state.companies = action.payload.companies || []; 
       })
       .addCase(fetchCompanies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      // ✅ Fetch a single company by ID
       .addCase(fetchCompanyById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchCompanyById.fulfilled, (state, action) => {
         state.loading = false;
-        state.company = action.payload.company || null; // ✅ Store only one company
+        state.company = action.payload.company || null; 
       })
       .addCase(fetchCompanyById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
 
-      // ✅ Register a new company
       .addCase(registerCompany.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -81,7 +75,7 @@ const companySlice1 = createSlice({
         const newCompany = action.payload.company;
 
         if (newCompany) {
-          state.companies = [...state.companies, newCompany]; // ✅ Ensure immutability
+          state.companies = [...state.companies, newCompany];
         }
       })
       .addCase(registerCompany.rejected, (state, action) => {
