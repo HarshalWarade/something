@@ -30,6 +30,7 @@ const corsOptions = {
   origin: "http://localhost:5173",
   credentials: true,
 }
+
 app.use(cors(corsOptions))
 
 const PORT = process.env.PORT || 3000
@@ -44,6 +45,7 @@ const MessageSchema = new mongoose.Schema({
 
 
 import { Message } from "./models/messages.model.js"
+import { User } from "./models/user.model.js"
 
 app.get("/messages", async (req, res) => {
   try {

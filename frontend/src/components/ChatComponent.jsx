@@ -109,7 +109,7 @@ const ChatComponent = () => {
 
         <div
           ref={chatContainerRef}
-          className="max-h-[75vh] overflow-y-auto relative p-3 border rounded"
+          className="max-h-[75vh] overflow-y-auto relative p-3 rounded"
           onScroll={handleScroll}
           style={{ backgroundColor: theme === "dark" ? "#222" : "#f9f9f9" }}
         >

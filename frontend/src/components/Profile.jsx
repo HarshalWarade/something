@@ -15,6 +15,8 @@ import SkillsAnalyser from "./SkillsAnalyser";
 import DashboardFirstDiv from "./DashboardFirstDiv";
 import MatchingJobs from "./MatchingJobs";
 import ChatComponent from "./ChatComponent";
+import Freelancing from "./Freelancing";
+import { Link } from "react-router-dom";
 
 const isResume = true;
 
@@ -166,6 +168,10 @@ const Profile = () => {
               ) : (
                 <span>NA</span>
               )}
+              <div className="flex gap-3 items-center content-center ">
+              Are you a freelancer?
+              <Link to="/freelancingportal" className={`text-blue-500 underline`}>Try Now</Link>
+              </div>
             </div>
           </div>
 

@@ -34,5 +34,15 @@ const userSchema = new mongoose.Schema({
             default:""
         }
     },
+    freelancingGigs: [
+        {
+            title: { type: String, required: true },
+            description: { type: String },
+            rate: { type: Number },
+            available: { type: Boolean, default: true },
+            tags: [{ type: String }],
+            createdAt: { type: Date, default: Date.now }
+        }
+    ],
 },{timestamps:true})
 export const User = mongoose.model('User', userSchema)

@@ -19,6 +19,7 @@ import AllUsers from './components/AllUsers'
 import WrongPage from './components/WrongPage'
 import ChatComponent from './components/ChatComponent'
 import CompanyDashboard from './components/CompanyDashboard'
+import Freelancing from './components/Freelancing'
 
 
 const appRouter = createBrowserRouter([
@@ -69,6 +70,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/company/:id",
     element: <CompanyDashboard />
+  },
+  {
+    path: "/freelancingportal",
+    element: <Freelancing />
   },
   
 

@@ -47,6 +47,238 @@ export const register = async (req, res) => {
   }
 }
 
+
+// export const register = async (req, res) => {
+//   try {
+//     const body = req.body;
+
+//     // Check if it's an array (bulk registration)
+//     if (Array.isArray(body)) {
+//       const results = [];
+
+//       for (const userData of body) {
+//         const { fullname, email, phoneNumber, password, role } = userData;
+
+//         if (!fullname || !email || !phoneNumber || !password || !role) {
+//           results.push({
+//             email,
+//             success: false,
+//             message: "Missing required fields",
+//           });
+//           continue;
+//         }
+
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) {
+//           results.push({
+//             email,
+//             success: false,
+//             message: "User already exists",
+//           });
+//           continue;
+//         }
+
+//         const hashedPassword = await bcrypt.hash(password, 10);
+
+//         await User.create({
+//           fullname,
+//           email,
+//           phoneNumber,
+//           password: hashedPassword,
+//           role,
+//           profile: {
+//             profilePhoto: null, // No file upload in bulk mode
+//           },
+//         });
+
+//         results.push({
+//           email,
+//           success: true,
+//           message: "User created",
+//         });
+//       }
+
+//       return res.status(201).json({
+//         message: "Bulk registration complete",
+//         results,
+//         success: true,
+//       });
+//     }
+
+//     // Single user registration (with optional file upload)
+//     const { fullname, email, phoneNumber, password, role } = body;
+
+//     if (!fullname || !email || !phoneNumber || !password || !role) {
+//       return res.status(400).json({
+//         message: "Something is missing",
+//         success: false,
+//       });
+//     }
+
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({
+//         message: "User already exists with this email.",
+//         success: false,
+//       });
+//     }
+
+//     let profilePhotoUrl = null;
+//     if (req.file) {
+//       const fileUri = getDataUri(req.file);
+//       const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+//         access_mode: "public",
+//       });
+//       profilePhotoUrl = cloudResponse.secure_url;
+//     }
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     await User.create({
+//       fullname,
+//       email,
+//       phoneNumber,
+//       password: hashedPassword,
+//       role,
+//       profile: {
+//         profilePhoto: profilePhotoUrl,
+//       },
+//     });
+
+//     return res.status(201).json({
+//       message: "Account created successfully.",
+//       success: true,
+//     });
+//   } catch (error) {
+//     console.error("Registration error:", error);
+//     return res.status(500).json({
+//       message: "Internal server error",
+//       success: false,
+//     });
+//   }
+// };
+
+// export const register = async (req, res) => {
+//   try {
+//     const body = req.body;
+
+//     // Check if it's an array (bulk registration)
+//     if (Array.isArray(body)) {
+//       const results = [];
+
+//       for (const userData of body) {
+//         const { fullname, email, phoneNumber, password, role, profile } = userData;
+
+//         if (!fullname || !email || !phoneNumber || !password || !role) {
+//           results.push({
+//             email,
+//             success: false,
+//             message: "Missing required fields",
+//           });
+//           continue;
+//         }
+
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) {
+//           results.push({
+//             email,
+//             success: false,
+//             message: "User already exists",
+//           });
+//           continue;
+//         }
+
+//         const hashedPassword = await bcrypt.hash(password, 10);
+
+//         await User.create({
+//           fullname,
+//           email,
+//           phoneNumber,
+//           password: hashedPassword,
+//           role,
+//           profile: {
+//             bio: profile?.bio || null, // Optional bio
+//             skills: profile?.skills || [], // Optional skills array
+//             resume: profile?.resume || null, // Optional resume URL
+//             resumeOriginalName: profile?.resumeOriginalName || null, // Optional resume original name
+//             company: profile?.company || null, // Optional company reference (if applicable)
+//             profilePhoto: null, // No file upload in bulk mode
+//           },
+//         });
+
+//         results.push({
+//           email,
+//           success: true,
+//           message: "User created",
+//         });
+//       }
+
+//       return res.status(201).json({
+//         message: "Bulk registration complete",
+//         results,
+//         success: true,
+//       });
+//     }
+
+//     // Single user registration (with optional file upload and profile fields)
+//     const { fullname, email, phoneNumber, password, role, profile } = body;
+
+//     if (!fullname || !email || !phoneNumber || !password || !role) {
+//       return res.status(400).json({
+//         message: "Something is missing",
+//         success: false,
+//       });
+//     }
+
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({
+//         message: "User already exists with this email.",
+//         success: false,
+//       });
+//     }
+
+//     let profilePhotoUrl = null;
+//     if (req.file) {
+//       const fileUri = getDataUri(req.file);
+//       const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+//         access_mode: "public",
+//       });
+//       profilePhotoUrl = cloudResponse.secure_url;
+//     }
+
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     await User.create({
+//       fullname,
+//       email,
+//       phoneNumber,
+//       password: hashedPassword,
+//       role,
+//       profile: {
+//         bio: profile?.bio || null, // Optional bio
+//         skills: profile?.skills || [], // Optional skills array
+//         resume: profile?.resume || null, // Optional resume URL
+//         resumeOriginalName: profile?.resumeOriginalName || null, // Optional resume original name
+//         company: profile?.company || null, // Optional company reference
+//         profilePhoto: profilePhotoUrl || null, // Profile photo URL
+//       },
+//     });
+
+//     return res.status(201).json({
+//       message: "Account created successfully.",
+//       success: true,
+//     });
+//   } catch (error) {
+//     console.error("Registration error:", error);
+//     return res.status(500).json({
+//       message: "Internal server error",
+//       success: false,
+//     });
+//   }
+// };
+
+
 export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body
@@ -301,3 +533,86 @@ export const getMessages = async (req, res) => {
       res.status(500).json({ success: false, message: "Failed to fetch messages" })
   }
 }
+
+
+export const updatethis = async(req, res) => {
+  try {
+    const result = await User.updateMany(
+      { freelancingGigs: { $exists: false } },
+      { $set: { freelancingGigs: [] } }
+    );
+    // console.log(`Updated ${result.modifiedCount} users.`);
+    return res.status(200).json({
+      success: true,
+      message: result
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update fields in server!"
+    })
+  }
+}
+
+export const getFreelancingGigs = async (req, res) => {
+  try {
+    console.log(req.params.userId)
+    const user = await User.findById(req.params.userId);
+    return res.status(200).json({
+      success: true,
+      respo: user.freelancingGigs
+    });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Error fetching gigs" });
+  }
+};
+
+export const addFreelancingGig = async (req, res) => {
+  try {
+    console.log(req.params.userId)
+    const user = await User.findById(req.params.userId);
+    user.freelancingGigs.push(req.body);
+    await user.save();
+    return res.status(200).json({ message: "Gig added", gigs: user.freelancingGigs });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Error adding gig" });
+  }
+};
+
+export const deleteFreelancingGig = async (req, res) => {
+  try {
+    console.log(req.params.userId)
+    const { userId, index } = req.params;
+    const user = await User.findById(userId);
+    user.freelancingGigs.splice(index, 1);
+    await user.save();
+    return res.status(200).json({ message: "Gig removed", gigs: user.freelancingGigs });
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Error deleting gig" });
+  }
+};
+
+
+export const deleteOldEntries = async () => {
+  try {
+    // Find the 8 oldest entries, assuming documents have a createdAt field
+    const usersToDelete = await User.find().sort({ createdAt: 1 }).limit(8);
+    
+    // Extract IDs of the users to delete
+    const userIdsToDelete = usersToDelete.map(user => user._id);
+
+    // Delete these 8 documents
+    await User.deleteMany({ _id: { $in: userIdsToDelete } });
+
+    console.log("Successfully deleted 8 users");
+    return res.status(200).json({
+      message: "Done",
+      success: true,
+    })
+  } catch (error) {
+    console.error("Error deleting users:", error);
+  }
+};

@@ -349,61 +349,108 @@ const SkillsAnalyser = ({ userSkills, theme }) => {
 
   const [analysis, setAnalysis] = useState(null);
 
+  // const analyzeSkills = () => {
+  //   let matchedFields = {};
+  //   let missingSkills = {};
+  //   let matchPercentages = {};
+
+  //   Object.entries(skillsData).forEach(([field, skills]) => {
+
+  //     let formattedUserSkills = userSkills.map((skill) =>
+  //       skill.toLowerCase().replace(/_/g, " ").trim()
+  //     );
+
+  //     let formattedFieldSkills = skills.map((skill) =>
+  //       skill.toLowerCase().replace(/_/g, " ").trim()
+  //     );
+
+  //     let matches = formattedUserSkills.filter((skill) =>
+  //       formattedFieldSkills.includes(skill)
+  //     );
+
+  //     if (matches.length > 0) {
+  //       matchedFields[field] = matches;
+  //       missingSkills[field] = formattedFieldSkills.filter(
+  //         (skill) => !formattedUserSkills.includes(skill)
+  //       );
+  //       matchPercentages[field] = (
+  //         (matches.length / skills.length) *
+  //         100
+  //       ).toFixed(2);
+  //     }
+  //   });
+
+  //   const primaryInterest =
+  //     Object.keys(matchPercentages).length > 0
+  //       ? Object.keys(matchPercentages).reduce(
+  //           (prev, curr) =>
+  //             matchPercentages[curr] > (matchPercentages[prev] || 0)
+  //               ? curr
+  //               : prev,
+  //           Object.keys(matchPercentages)[0]
+  //         )
+  //       : "No strong match found";
+
+  //   setAnalysis({
+  //     matchedFields,
+  //     missingSkills,
+  //     matchPercentages,
+  //     primaryInterest,
+  //   });
+
+  //   // console.log("Matched Fields:", matchedFields);
+  //   // console.log("Missing Skills:", missingSkills);
+  //   // console.log("Match Percentages:", matchPercentages);
+  //   // console.log("Primary Interest:", primaryInterest);
+  // };
+
   const analyzeSkills = () => {
     let matchedFields = {};
     let missingSkills = {};
     let matchPercentages = {};
-
+  
     Object.entries(skillsData).forEach(([field, skills]) => {
-
+  
       let formattedUserSkills = userSkills.map((skill) =>
         skill.toLowerCase().replace(/_/g, " ").trim()
       );
-
+  
       let formattedFieldSkills = skills.map((skill) =>
         skill.toLowerCase().replace(/_/g, " ").trim()
       );
-
+  
       let matches = formattedUserSkills.filter((skill) =>
         formattedFieldSkills.includes(skill)
       );
-
+  
       if (matches.length > 0) {
         matchedFields[field] = matches;
         missingSkills[field] = formattedFieldSkills.filter(
           (skill) => !formattedUserSkills.includes(skill)
         );
         matchPercentages[field] = (
-          (matches.length / skills.length) *
-          100
+          (matches.length / skills.length) * 100
         ).toFixed(2);
       }
     });
-
+  
+    // Fix: Properly calculate the primary interest
     const primaryInterest =
       Object.keys(matchPercentages).length > 0
-        ? Object.keys(matchPercentages).reduce(
+        ? Object.entries(matchPercentages).reduce(
             (prev, curr) =>
-              matchPercentages[curr] > (matchPercentages[prev] || 0)
-                ? curr
-                : prev,
-            Object.keys(matchPercentages)[0]
-          )
+              parseFloat(curr[1]) > parseFloat(prev[1]) ? curr : prev
+          )[0]
         : "No strong match found";
-
+  
     setAnalysis({
       matchedFields,
       missingSkills,
       matchPercentages,
       primaryInterest,
     });
-
-    // console.log("Matched Fields:", matchedFields);
-    // console.log("Missing Skills:", missingSkills);
-    // console.log("Match Percentages:", matchPercentages);
-    // console.log("Primary Interest:", primaryInterest);
   };
-
+  
   return (
     <div>
       <div className={`flex items-center gap-4`}>

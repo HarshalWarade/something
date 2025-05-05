@@ -10,6 +10,9 @@ const AllUsers = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
+  const profilePic =
+    "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -51,23 +54,31 @@ const AllUsers = () => {
               All Users
             </h2>
 
-            <div className={`flex gap-4 items-start`}>
+            <div className={`flex gap-4`}>
               {users.map((user) => (
-                
                 <div
                   key={user._id}
-                  className={`p-6 rounded-2xl shadow-lg w-1/2 mx-auto ${theme === "dark" ? "bg-[#2b2b2b] text-white" : "bg-white text-gray-800 border shadow-sm"}`}
+                  className={`p-6 rounded-2xl shadow-lg w-[33%] h-min mx-auto ${
+                    theme === "dark"
+                      ? "bg-[#2b2b2b] text-white"
+                      : "bg-white text-gray-800 border shadow-sm"
+                  }`}
                 >
                   <div className="flex flex-col items-center">
                     <img
-                      src={user?.profile?.profilePhoto}
+                      src={user?.profile?.profilePhoto ?? profilePic}
                       alt="Profile"
-                      className="w-24 h-24 rounded-full shadow-md"
+                      className="w-24 h-24 rounded-full"
                     />
-                    <h2 className="text-xl font-semibold mt-4">
+
+                    <h2 className="text-xl text-center font-semibold mt-4">
                       {user.fullname}
                     </h2>
-                    <p className={`mt-3 text-center ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
+                    <p
+                      className={`mt-3 text-center ${
+                        theme === "dark" ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
                       {user?.profile?.bio}
                     </p>
                     <button

@@ -24,7 +24,7 @@ const HeroSection = () => {
             <div className='flex flex-col gap-8 my-10'>
                 <span className={`mx-auto px-4 font-semibold py-2 rounded-full ${theme === "dark" ? "bg-red-300 text-[#b11b1b]" : "bg-red-50"} text-[#ec2525] font-medium`}>Job Hunting made easier</span>
                 <h1 className={`text-5xl font-bold ${theme === "dark" ? "text-white" : ""}`}>Search, Apply & <br /> Get Your <span className='text-[#ec2525]'>Dream Job</span></h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aspernatur temporibus nihil tempora dolor!</p>
+                <p>Discover thousands of jobs. Apply with a click. Succeed with confidence.</p>
                 <div className={`flex w-[40%] pl-1 rounded-md items-center gap-4 mx-auto ${theme === "dark" ? "border border-gray-700" : "border border-gray-400"}`}>
                     <input
                         type="text"

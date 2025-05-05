@@ -12,16 +12,18 @@ import { setSingleCompany } from '@/redux/companySlice'
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
-    const [companyName, setCompanyName] = useState();
+    const [companyName, setCompanyName] = useState("");
     const dispatch = useDispatch();
     const registerNewCompany = async () => {
+        console.log("pass1")
         try {
             const res = await axios.post(`${COMPANY_API_END_POINT}/register`, {companyName}, {
                 headers:{
-                    'Content-Type':'application/json'
+                    "Content-Type": "application/json"
                 },
                 withCredentials:true
             });
+            console.log("pass2")
             if(res?.data?.success){
                 dispatch(setSingleCompany(res.data.company));
                 toast.success(res.data.message);
@@ -29,7 +31,7 @@ const CompanyCreate = () => {
                 navigate(`/admin/companies/${companyId}`);
             }
         } catch (error) {
-            console.log(error);
+            console.error('Backend error response:', error.response?.data);
         }
     }
     return (
