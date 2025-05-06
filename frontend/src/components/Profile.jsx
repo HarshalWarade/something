@@ -168,10 +168,10 @@ const Profile = () => {
               ) : (
                 <span>NA</span>
               )}
-              <div className="flex gap-3 items-center content-center ">
+              {/* <div className="flex gap-3 items-center content-center ">
               Are you a freelancer?
               <Link to="/freelancingportal" className={`text-blue-500 underline`}>Try Now</Link>
-              </div>
+              </div> */}
             </div>
           </div>
 

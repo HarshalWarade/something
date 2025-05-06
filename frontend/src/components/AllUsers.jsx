@@ -54,11 +54,11 @@ const AllUsers = () => {
               All Users
             </h2>
 
-            <div className={`flex gap-4`}>
+            <div className={`flex flex-wrap gap-4`}>
               {users.map((user) => (
                 <div
                   key={user._id}
-                  className={`p-6 rounded-2xl shadow-lg w-[33%] h-min mx-auto ${
+                  className={`p-6 rounded-2xl shadow-lg w-[23%] h-min mx-auto ${
                     theme === "dark"
                       ? "bg-[#2b2b2b] text-white"
                       : "bg-white text-gray-800 border shadow-sm"
